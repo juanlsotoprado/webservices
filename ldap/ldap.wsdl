@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	name='consultarLdap'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+	<types>
+		<xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/ldap">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+			<xsd:all>
+				<xsd:element name="numcedula" type="xsd:string"/>
+				<xsd:element name="nombre" type="xsd:string"/>
+				<xsd:element name="correo" type="xsd:string"/>
+				<xsd:element name="oficina" type="xsd:string"/>
+			</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+					<xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Estructura[]"/>
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- Servicio 1 -->
+
+	<message name='consultarLdapRequest'>
+	  <part name='numero' type='tns:ArregloDeEstructuras'/>
+	</message>
+
+	<message name='consultarLdapResponse'>
+	  <part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+
+	<portType name='consultarLdapPortType'>
+		<operation name='consultarLdap'>
+			<documentation>Consulta Ldap</documentation>
+			<input message='tns:consultarLdapRequest'/>
+			<output message='tns:consultarLdapResponse'/>
+		</operation>
+	</portType>
+
+	<binding name='consultarLdapBinding' type='tns:consultarLdapPortType'>
+	  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+	  <operation name='consultarLdap'>
+	    <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarLdap'/>
+	    <input>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </input>
+	    <output>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </output>
+	  </operation>
+	</binding>
+
+	<service name='consultarLdapService'>
+	  <port name='consultarLdapPort' binding='consultarLdapBinding'>
+	    <soap:address location='http://webservices.mppeuct.gob.ve/ldap/servicio.php'/>
+	  </port>
+	</service>
+	
+	<!-- Servicio 2 -->
+	
+	<message name='consultarDatosPersonalesLdapRequest'>
+	  <part name='numero' type='tns:ArregloDeEstructuras'/>
+	</message>
+
+	<message name='consultarDatosPersonalesLdapResponse'>
+	  <part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+
+	<portType name='consultarDatosPersonalesLdapPortType'>
+		<operation name='consultarDatosPersonalesLdap'>
+			<documentation>Consultar Datos Personales LDAP</documentation>
+			<input message='tns:consultarDatosPersonalesLdapRequest'/>
+			<output message='tns:consultarDatosPersonalesLdapResponse'/>
+		</operation>
+	</portType>
+
+	<binding name='consultarDatosPersonalesLdapBinding' type='tns:consultarDatosPersonalesLdapPortType'>
+	  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+	  <operation name='consultarDatosPersonalesLdap'>
+	    <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarDatosPersonalesLdap'/>
+	    <input>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </input>
+	    <output>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </output>
+	  </operation>
+	</binding>
+
+	<service name='consultarDatosPersonalesLdapService'>
+	  <port name='consultarDatosPersonalesLdapPort' binding='consultarDatosPersonalesLdapBinding'>
+	    <soap:address location='http://webservices.mppeuct.gob.ve/ldap/servicio.php'/>
+	  </port>
+	</service>
+
+</definitions>

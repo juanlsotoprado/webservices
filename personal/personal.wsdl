@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name='consultarPersona'
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns="http://schemas.xmlsoap.org/wsdl/" 
+    targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+    <types>
+        <xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/ldap">
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+            <xsd:complexType name="Estructura">
+                <xsd:all>
+                    <xsd:element name="cedula" type="xsd:string"/>
+                    <xsd:element name="primer_nombre" type="xsd:string"/>
+                    <xsd:element name="segundo_nombre" type="xsd:string"/>
+                    <xsd:element name="primer_apellido" type="xsd:string"/>
+                    <xsd:element name="segundo_apellido" type="xsd:string"/>
+                    <xsd:element name="cargo" type="xsd:string"/>
+                    <xsd:element name="fecha_ingreso" type="xsd:string"/>
+                    <xsd:element name="id_personal" type="xsd:string"/>
+                    <xsd:element name="respuesta" type="xsd:Estructura[]" />
+                    
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="ArregloDeEstructuras">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Estructura[]"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+        </xsd:schema>
+        
+    </types>
+	
+    <!-- Servicio 1 -->
+
+    <message name='consultarPersonaRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras'/>
+    </message>
+
+    <message name='consultarPersonaResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+
+    <portType name='consultarPersonaPortType'>
+        <operation name='consultarPersona'>
+            <documentation>Consulta Ldap</documentation>
+            <input message='tns:consultarPersonaRequest'/>
+            <output message='tns:consultarPersonaResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='consultarPersonaBinding' type='tns:consultarPersonaPortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='consultarPersona'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarPersona'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarPersonaService'>
+        <port name='consultarPersonaPort' binding='consultarPersonaBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/personal/servicio.php'/>
+        </port>
+    </service>
+	
+    <!-- Servicio 2 -->
+	
+    <message name='consultarPersonasRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras'/>
+    </message>
+
+    <message name='consultarPersonasResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+
+    <portType name='consultarPersonasPortType'>
+        <operation name='consultarPersonas'>
+            <documentation>Consultar Personas Por Cédulas</documentation>
+            <input message='tns:consultarPersonasRequest'/>
+            <output message='tns:consultarPersonasResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='consultarPersonasBinding' type='tns:consultarPersonasPortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='consultarPersonas'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarPersonas'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarPersonasService'>
+        <port name='consultarPersonasPort' binding='consultarPersonasBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/personal/servicio.php'/>
+        </port>
+    </service>
+        
+        
+    
+        <!-- Servicio 3 -->
+	
+    
+    <message name='consultarPersonaDependenciaRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras'/>
+    </message>
+
+    <message name='consultarPersonaDependenciaResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+
+    <portType name='consultarPersonaDependenciaPortType'>
+        <operation name='consultarPersonaDependencia'>
+            <documentation>Consulta Ldap</documentation>
+            <input message='tns:consultarPersonaDependenciaRequest'/>
+            <output message='tns:consultarPersonaDependenciaResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='consultarPersonaDependenciaBinding' type='tns:consultarPersonaDependenciaPortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='consultarPersonaDependencia'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarPersonaDependencia'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarPersonaDependenciaService'>
+        <port name='consultarPersonaDependenciaPort' binding='consultarPersonaDependenciaBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/personal/servicio.php'/>
+        </port>
+    </service>
+    
+            <!-- Servicio 4 -->
+	
+    
+    <message name='consultarPersonaIdPersonalRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras'/>
+    </message>
+
+    <message name='consultarPersonaIdPersonalResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+
+    <portType name='consultarPersonaIdPersonalPortType'>
+        <operation name='consultarPersonaIdPersonal'>
+            <documentation>Consulta Ldap</documentation>
+            <input message='tns:consultarPersonaIdPersonalRequest'/>
+            <output message='tns:consultarPersonaIdPersonalResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='consultarPersonaIdPersonalBinding' type='tns:consultarPersonaIdPersonalPortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='consultarPersonaIdPersonal'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarPersonaIdPersonal'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarPersonaIdPersonalService'>
+        <port name='consultarPersonaIdPersonalPort' binding='consultarPersonaIdPersonalBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/personal/servicio.php'/>
+        </port>
+    </service>
+    
+    	<!-- Servicio 5 -->
+    
+    <message name='consultarDependenciasRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras'/>
+    </message>
+
+    <message name='consultarDependenciasResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+
+    <portType name='consultarDependenciasPortType'>
+        <operation name='consultarDependencias'>
+            <documentation>Consulta Ldap</documentation>
+            <input message='tns:consultarDependenciasRequest'/>
+            <output message='tns:consultarDependenciasResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='consultarDependenciasBinding' type='tns:consultarDependenciasPortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='consultarDependencias'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarDependencias'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarDependenciasService'>
+        <port name='consultarDependenciasPort' binding='consultarDependenciasBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/personal/servicio.php'/>
+        </port>
+    </service>
+    
+        <!-- Servicio 6 -->
+
+    
+    <message name='consultarPersonaDependenciaCargosRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras'/>
+    </message>
+
+    <message name='consultarPersonaDependenciaCargosResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+
+    <portType name='consultarPersonaDependenciaCargosPortType'>
+        <operation name='consultarPersonaDependenciaCargos'>
+            <documentation>Consulta Ldap</documentation>
+            <input message='tns:consultarPersonaDependenciaCargosRequest'/>
+            <output message='tns:consultarPersonaDependenciaCargosResponse'/>
+        </operation>
+    </portType>
+
+    <binding name='consultarPersonaDependenciaCargosBinding' type='tns:consultarPersonaDependenciaCargosPortType'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='consultarPersonaDependenciaCargos'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarPersonaDependenciaCargos'/>
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarPersonaDependenciaCargosService'>
+        <port name='consultarPersonaDependenciaCargosPort' binding='consultarPersonaDependenciaCargosBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/personal/servicio.php'/>
+        </port>
+    </service>
+  	
+</definitions>

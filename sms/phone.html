@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://apis.mppeuct.gob.ve/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="sms.css" rel="stylesheet" type="text/css">
+<title>Envío de Mensajes de Texto</title>
+<script language="JavaScript1.2" src="http://apis.mppeuct.gob.ve/js/jquery/v2/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script language="JavaScript1.2" src="http://apis.mppeuct.gob.ve/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript" src="sms.js"></script>
+<style>
+
+</style>
+</head>
+<body>
+<div id="phone">
+	<div id="reloj">00:00</div>
+    <div id="cuerpo">
+        <div class="inner-addon left-addon" id="numero">
+            <input type="text" id="num" onkeypress="return solo_enteros(event,this,'       Destinatario      ','Ingrese sólo números, Ej. 04165555555');"  onblur="ocultar_popover(this.id)" class="form-control" placeholder="04160000000" id="destinatario" style="min-width: 90%"/>
+        </div>
+    	<textarea placeholder="Escribir mensaje..." class="form-control col-xs-9" style="min-width: 92%" id="texto" rows="10" name="limitedtextarea" onKeyDown="limitText(this,140);" onKeyUp="limitText(this,140);" maxlength="140"></textarea>
+		<div id="caracteres">Restan <span id="countdown">140</span> caracteres</div>
+        <div id="boton">
+			<button type="submit" class="btn btn-success btn btn-lg" style="display: block; width: 100%;" onclick="enviar_mensaje()">
+				<i class="glyphicon glyphicon-envelope"></i> Enviar
+			</button>
+		</div>
+    </div>
+</body>
+<script language="javascript" type="text/javascript">
+mueveReloj();
+setTimeout("mueveReloj()",1000);
+</script>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+</body>
+</html>
+  
+</div>
+</html>

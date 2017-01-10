@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	name='enviarSms'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+    <types>
+        <xsd:schema targetNamespace='http://webservices.mppeuct.gob.ve/sms'>
+            <complexType name='Estructura'>
+                <sequence>
+                    <element name='param1' type='xsd:string' />
+                    <element name='param2' type='xsd:string' />
+                    <xsd:any maxOccurs="unbounded"/>
+                </sequence>
+            </complexType>
+            
+            <complexType name="ArrayOfCadenas">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <sequence>
+                            <element name="item" type="string" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+                        </sequence>
+                        <attributeGroup ref="soapenc:arrayType" xsd:arrayType="xsd:string[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            
+            <complexType name="ArrayEstructuras">
+                <complexContent mixed="false">
+                    <restriction base="soapenc:Array">
+                        <sequence>
+                            <element name="item2" type="Estructura" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+                        </sequence>
+                        <attributeGroup ref="soapenc:arrayType" xsd:arrayType="Estructura[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+        </xsd:schema>
+    </types>
+
+	<message name='enviarSmsRequest'>
+	  <part name='numero' type='xsd:ArrayEstructuras'/>
+	</message>
+
+	<message name='enviarSmsResponse'>
+	  <part name='Result' type='xsd:string'/>
+	</message>
+
+	<portType name='enviarSmsPortType'>
+	  <operation name='enviarSms'>
+	    <input message='tns:enviarSmsRequest'/>
+	    <output message='tns:enviarSmsResponse'/>
+	  </operation>
+	</portType>
+
+	<binding name='enviarSmsBinding' type='tns:enviarSmsPortType'>
+	  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+	  <operation name='enviarSms'>
+	    <soap:operation soapAction='urn:xmethods-delayed-quotes#enviarSms'/>
+	    <input>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </input>
+	    <output>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </output>
+	  </operation>
+	</binding>
+
+	<service name='enviarSmsService'>
+	  <port name='enviarSmsPort' binding='enviarSmsBinding'>
+	    <soap:address location='http://webservices.mppeuct.gob.ve/sms/servicio.php'/>
+	  </port>
+	</service>
+
+</definitions>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	name='enviarCorreo'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+	<types>
+		<xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/correo">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+			<xsd:all>
+				<xsd:element name="numcedula" type="xsd:string"/>
+				<xsd:element name="nombre" type="xsd:string"/>
+				<xsd:element name="correo" type="xsd:string"/>
+				<xsd:element name="oficina" type="xsd:string"/>
+			</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+					<xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Estructura[]"/>
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+
+	<message name='enviarCorreoRequest'>
+	  <part name='numero' type='tns:ArregloDeEstructuras'/>
+	</message>
+
+	<message name='enviarCorreoResponse'>
+	  <part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+
+	<portType name='enviarCorreoPortType'>
+		<operation name='enviarCorreo'>
+			<documentation>Enviar Correo Electrónico</documentation>
+			<input message='tns:enviarCorreoRequest'/>
+			<output message='tns:enviarCorreoResponse'/>
+		</operation>
+	</portType>
+
+	<binding name='enviarCorreoBinding' type='tns:enviarCorreoPortType'>
+	  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+	  <operation name='enviarCorreo'>
+	    <soap:operation soapAction='urn:xmethods-delayed-quotes#enviarCorreo'/>
+	    <input>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </input>
+	    <output>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </output>
+	  </operation>
+	</binding>
+
+	<service name='enviarCorreoService'>
+	  <port name='enviarCorreoPort' binding='enviarCorreoBinding'>
+	    <soap:address location='http://webservices.mppeuct.gob.ve/correo/servicio.php'/>
+	  </port>
+	</service>
+
+</definitions>

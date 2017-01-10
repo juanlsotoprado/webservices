@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name='getUniversidades'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+	<!-- acá solo se define el tipo arreglo de estructuras -->
+	<types>
+		<xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/loeu">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+				<xsd:all>
+					<xsd:element name="error" type="xsd:int" />
+					<xsd:element name="respuesta" type="xsd:Estructura[]" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:Estructura[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<!-- fin de la definiciond e tipos -->
+
+	<!-- @TODO: Servicio 1 (consulta de las universidades) -->
+
+	<message name='getUniversidadesRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='getUniversidadesResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='getUniversidadesPortType'>
+		<operation name='getUniversidades'>
+			<documentation>Consulta Persona</documentation>
+			<input message='tns:getUniversidadesRequest' />
+			<output message='tns:getUniversidadesResponse' />
+		</operation>
+	</portType>
+	<binding name='getUniversidadesBinding' type='tns:getUniversidadesPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='getUniversidades'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#getUniversidades' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='getUniversidadesService'>
+		<port name='getUniversidadesPort' binding='tns:getUniversidadesBinding'>
+			<soap:address location='http://webservices.mppeuct.gob.ve/loeu/servicios.php' />
+		</port>
+	</service>
+
+
+	<!-- @TODO: Servicio 2 (consulta de la institución por código) -->
+
+	<message name='getCarrerasUniversidadRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='getCarrerasUniversidadResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='getCarrerasUniversidadPortType'>
+		<operation name='getCarrerasUniversidad'>
+			<documentation>Extraer Datos Universidad</documentation>
+			<input message='tns:getCarrerasUniversidadRequest' />
+			<output message='tns:getCarrerasUniversidadResponse' />
+		</operation>
+	</portType>
+	<binding name='getCarrerasUniversidadBinding' type='tns:getCarrerasUniversidadPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='getCarrerasUniversidad'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#getCarrerasUniversidad' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='getCarrerasUniversidadService'>
+		<port name='getCarrerasUniversidadPort' binding='tns:getCarrerasUniversidadBinding'>
+			<soap:address location='http://webservices.mppeuct.gob.ve/loeu/servicios.php' />
+		</port>
+	</service>
+	
+	<!-- @TODO: Servicio 3 (extraer Universidad por Id) -->
+
+	<message name='getDetalleUniversidadPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='getDetalleUniversidadPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='getDetalleUniversidadPorIdPortType'>
+		<operation name='getDetalleUniversidadPorId'>
+			<documentation>Extraer Universidad por ID</documentation>
+			<input message='tns:getDetalleUniversidadPorIdRequest' />
+			<output message='tns:getDetalleUniversidadPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='getDetalleUniversidadPorIdBinding' type='tns:getDetalleUniversidadPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='getDetalleUniversidadPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#getDetalleUniversidadPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='getDetalleUniversidadPorIdService'>
+		<port name='getDetalleUniversidadPorIdPort' binding='tns:getDetalleUniversidadPorIdBinding'>
+			<soap:address location='http://webservices.mppeuct.gob.ve/loeu/servicios.php' />
+		</port>
+	</service>
+	
+	<!-- @TODO: Servicio 4 (extraer Carrera por Id) -->
+
+	<message name='getDetalleCarreraPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='getDetalleCarreraPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='getDetalleCarreraPorIdPortType'>
+		<operation name='getDetalleCarreraPorId'>
+			<documentation>Extraer Carrera por ID</documentation>
+			<input message='tns:getDetalleCarreraPorIdRequest' />
+			<output message='tns:getDetalleCarreraPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='getDetalleCarreraPorIdBinding' type='tns:getDetalleCarreraPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='getDetalleCarreraPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#getDetalleCarreraPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='getDetalleCarreraPorIdService'>
+		<port name='getDetalleCarreraPorIdPort' binding='tns:getDetalleCarreraPorIdBinding'>
+			<soap:address location='http://webservices.mppeuct.gob.ve/loeu/servicios.php' />
+		</port>
+	</service>
+
+	
+</definitions>

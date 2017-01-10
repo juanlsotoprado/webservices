@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name='getBeneficiariosPorCedulaTitular'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+	<!-- acá solo se define el tipo arreglo de estructuras -->
+	<types>
+		<xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/sas">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+				<xsd:all>
+					<xsd:element name="error" type="xsd:int" />
+					<xsd:element name="respuesta" type="xsd:Estructura[]" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:Estructura[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<!-- fin de la definiciond e tipos -->
+
+	<!-- @TODO: Servicio 1 (consulta de beneficiarios por cédula) -->
+
+	<message name='getBeneficiariosPorCedulaTitularRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='getBeneficiariosPorCedulaTitularResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='getBeneficiariosPorCedulaTitularPortType'>
+		<operation name='getBeneficiariosPorCedulaTitular'>
+			<documentation>Consultar Asegurados</documentation>
+			<input message='tns:getBeneficiariosPorCedulaTitularRequest' />
+			<output message='tns:getBeneficiariosPorCedulaTitularResponse' />
+		</operation>
+	</portType>
+	<binding name='getBeneficiariosPorCedulaTitularBinding' type='tns:getBeneficiariosPorCedulaTitularPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='getBeneficiariosPorCedulaTitular'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#getBeneficiariosPorCedulaTitular' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='getBeneficiariosPorCedulaTitularService'>
+		<port name='getBeneficiariosPorCedulaTitularPort' binding='tns:getBeneficiariosPorCedulaTitularBinding'>
+			<soap:address location='http://webservices.mppeuct.gob.ve/sas/servicios.php' />
+		</port>
+	</service>
+	
+	
+	
+	<!-- @TODO: Servicio 2 (consulta de beneficiario especifico por cedula) -->
+
+	<message name='extraerDatosBeneficiarioRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='extraerDatosBeneficiarioResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='extraerDatosBeneficiarioPortType'>
+		<operation name='extraerDatosBeneficiario'>
+			<documentation>Consultar Datos Asegurados</documentation>
+			<input message='tns:extraerDatosBeneficiarioRequest' />
+			<output message='tns:extraerDatosBeneficiarioResponse' />
+		</operation>
+	</portType>
+	<binding name='extraerDatosBeneficiarioBinding' type='tns:extraerDatosBeneficiarioPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='extraerDatosBeneficiario'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#extraerDatosBeneficiario' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='extraerDatosBeneficiarioService'>
+		<port name='extraerDatosBeneficiarioPort' binding='tns:extraerDatosBeneficiarioBinding'>
+			<soap:address location='http://webservices.mppeuct.gob.ve/sas/servicios.php' />
+		</port>
+	</service>
+
+
+	
+</definitions>

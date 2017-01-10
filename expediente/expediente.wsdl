@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name='consultarExpediente'
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns="http://schemas.xmlsoap.org/wsdl/" 
+    targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+    <types>
+        <xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/ldap">
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+            <xsd:complexType name="Estructura">
+                <xsd:all>
+                    <xsd:element name="error" type="xsd:int" />
+                     <xsd:element name="respuesta" type="xsd:Estructura[]" />
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="ArregloDeEstructuras">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType"  wsdl:arrayType="tns:Estructura[]"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+        </xsd:schema>
+        
+    </types>
+	
+        
+    <!-- Servicio 1 -->
+    <!--  @TODO: Servicio 21 (obtener esttructura por nivel) -->
+	
+    <message name='consultarExpedienteRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras' />
+    </message>
+    <message name='consultarExpedienteResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+    <portType name='consultarExpedientePortType'>
+        <operation name='consultarExpediente'>
+            <documentation>consultarExpediente</documentation>
+            <input message='tns:consultarExpedienteRequest' />
+            <output message='tns:consultarExpedienteResponse' />
+        </operation>
+    </portType>
+    <binding name='consultarExpedienteBinding' type='tns:consultarExpedientePortType'>
+        <soap:binding style='rpc'
+                              transport='http://schemas.xmlsoap.org/soap/http' />
+        <operation name='consultarExpediente'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarExpediente' />
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+                                           encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+                                           encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarExpedienteService'>
+        <port name='consultarExpedientePort' binding='consultarExpedienteBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/expediente/servicio.php'/>
+        </port>
+    </service>
+
+</definitions>

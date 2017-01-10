@@ -1,0 +1,68 @@
+#phone{
+	background-image: url(phone.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width:327px;
+	height:653px;
+	display:inline;
+	position:absolute;
+	top:5%;
+	left:50%;
+	margin-left:-162px;
+}
+#cuerpo{
+	position:absolute;
+	top:135px;
+	left:29px;
+	width:299px;
+}
+#texto{
+	width:90%;
+	color:#010101;
+	font-size:15px;
+	font-weight:bold;
+	top:30px;
+}
+#caracteres{
+	background-color:#FFF;	
+	/*width:348px;*/
+	padding:5px;
+	position:absolute;
+	left:5px;
+	font-size:10px;
+	color:#7E7E7E;
+	font-style:italic;
+	bottom:-30px;
+}
+#boton{
+	width:275px;
+	padding:5px;
+	position:absolute;
+	/*left:50%;*/
+	font-size:10px;
+	color:#7E7E7E;
+	font-weight:bold;
+	bottom:-90px;
+	/*margin-left:-70px*/
+}
+#reloj{
+	width:100%;
+	padding:5px;
+	position:absolute;
+	color:#FFF;
+	top:67px;
+	font-size:8px;
+	font-weight:bold;
+	z-index:100;
+	//margin-left:-60px;
+	text-align:center;
+}
+#numero{
+	width:92%;
+	position:absolute;
+	top:-20px;
+	font-size:8px;
+	text-align:center;
+	font-weight:bold;
+}
+.form-control { width: 100%; }

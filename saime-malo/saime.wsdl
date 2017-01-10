@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	name='consultarSaime'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+	<types>
+		<xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/saime">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+			<xsd:all>
+				<xsd:element name="numcedula" type="xsd:string"/>
+				<xsd:element name="primernombre" type="xsd:string"/>
+				<xsd:element name="segundonombre" type="xsd:string"/>
+				<xsd:element name="primerapellido" type="xsd:string"/>
+				<xsd:element name="segundoapellido" type="xsd:string"/>
+				<xsd:element name="sexo" type="xsd:string"/>
+				<xsd:element name="fechanac" type="xsd:string"/>
+				<xsd:element name="nacionalidad" type="xsd:string"/>
+				<xsd:element name="paisorigen" type="xsd:string"/>
+				<xsd:element name="letra" type="xsd:string"/>
+			</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+					<xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Estructura[]"/>
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+
+	<message name='consultarSaimeRequest'>
+	  <part name='numero' type='tns:ArregloDeEstructuras'/>
+	</message>
+
+	<message name='consultarSaimeResponse'>
+	  <part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+
+	<portType name='consultarSaimePortType'>
+		<operation name='consultarSaime'>
+			<documentation>Consulta SAIME</documentation>
+			<input message='tns:consultarSaimeRequest'/>
+			<output message='tns:consultarSaimeResponse'/>
+		</operation>
+	</portType>
+
+	<binding name='consultarSaimeBinding' type='tns:consultarSaimePortType'>
+	  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+	  <operation name='consultarSaime'>
+	    <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarSaime'/>
+	    <input>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </input>
+	    <output>
+	      <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+	    </output>
+	  </operation>
+	</binding>
+
+	<service name='consultarSaimeService'>
+	  <port name='consultarSaimePort' binding='consultarSaimeBinding'>
+	    <soap:address location='http://webservices.mppeuct.gob.ve/saime/servicio.php'/>
+	  </port>
+	</service>
+
+</definitions>

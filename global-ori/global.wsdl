@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name='consultar'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://webservices.mppeuct.gob.ve/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+	<!-- acá solo se define el tipo arreglo de estructuras -->
+	<types>
+		<xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/global">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+				<xsd:all>
+					<xsd:element name="error" type="xsd:int" />
+					<xsd:element name="respuesta" type="xsd:Estructura[]" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:Estructura[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<!-- fin de la definiciond e tipos -->
+
+	<!-- @TODO: Servicio 1 (consulta de los estados) -->
+
+	<message name='obtenerEstadosRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerEstadosResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerEstadosPortType'>
+		<operation name='obtenerEstados'>
+			<documentation>Consulta de Estados</documentation>
+			<input message='tns:obtenerEstadosRequest' />
+			<output message='tns:obtenerEstadosResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerEstadosBinding' type='tns:obtenerEstadosPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerEstados'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEstados' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerEstadosService'>
+		<port name='obtenerEstadosPort' binding='tns:obtenerEstadosBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+
+	<!-- @TODO: Servicio 2 (consulta de los municipios) -->
+
+	<message name='obtenerMunicipiosRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerMunicipiosResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerMunicipiosPortType'>
+		<operation name='obtenerMunicipios'>
+			<documentation>Consulta de Municipios</documentation>
+			<input message='tns:obtenerMunicipiosRequest' />
+			<output message='tns:obtenerMunicipiosResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerMunicipiosBinding' type='tns:obtenerMunicipiosPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerMunicipios'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerMunicipios' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerMunicipiosService'>
+		<port name='obtenerMunicipiosPort' binding='tns:obtenerMunicipiosBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+
+	<!-- @TODO: Servicio 3 (consulta de los parroquias) -->
+
+	<message name='obtenerParroquiasRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerParroquiasResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerParroquiasPortType'>
+		<operation name='obtenerParroquias'>
+			<documentation>Consulta de Parroquias</documentation>
+			<input message='tns:obtenerParroquiasRequest' />
+			<output message='tns:obtenerParroquiasResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerParroquiasBinding' type='tns:obtenerParroquiasPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerParroquias'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerParroquias' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerParroquiasService'>
+		<port name='obtenerParroquiasPort' binding='tns:obtenerParroquiasBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+
+	<!-- @TODO: Servicio 4 (consultar los entes en iteracion) -->
+
+	<message name='obtenerEstructuraEntesRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerEstructuraEntesResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerEstructuraEntesPortType'>
+		<operation name='obtenerEstructuraEntes'>
+			<documentation>Consulta de Entes</documentation>
+			<input message='tns:obtenerEstructuraEntesRequest' />
+			<output message='tns:obtenerEstructuraEntesResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerEstructuraEntesBinding' type='tns:obtenerEstructuraEntesPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerEstructuraEntes'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEstructuraEntes' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerEstructuraEntesService'>
+		<port name='obtenerEstructuraEntesPort' binding='tns:obtenerEstructuraEntesBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!-- @TODO: Servicio 5 (consultar hijos primer nivel dependencias) -->
+
+	<message name='getEstructuraEnteHijosRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='getEstructuraEnteHijosResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='getEstructuraEnteHijosPortType'>
+		<operation name='getEstructuraEnteHijos'>
+			<documentation>Consulta de Dependencias Ente</documentation>
+			<input message='tns:getEstructuraEnteHijosRequest' />
+			<output message='tns:getEstructuraEnteHijosResponse' />
+		</operation>
+	</portType>
+	<binding name='getEstructuraEnteHijosBinding' type='tns:getEstructuraEnteHijosPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='getEstructuraEnteHijos'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEstructuraEntes' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='getEstructuraEnteHijosService'>
+		<port name='getEstructuraEnteHijosPort' binding='tns:getEstructuraEnteHijosBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!-- @TODO: Servicio 6 (consultar hijos primer nivel dependencias) -->
+
+	<message name='obtenerEtniasRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerEtniasResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerEtniasPortType'>
+		<operation name='obtenerEtnias'>
+			<documentation>Consulta de Etnias</documentation>
+			<input message='tns:obtenerEtniasRequest' />
+			<output message='tns:obtenerEtniasResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerEtniasBinding' type='tns:obtenerEtniasPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerEtnias'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEtnias' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerEtniasService'>
+		<port name='obtenerEtniasPort' binding='tns:obtenerEtniasBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	
+	<!-- @TODO: Servicio 7 (consultar las discapacidades) -->
+
+	<message name='obtenerDiscapacidadesRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDiscapacidadesResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDiscapacidadesPortType'>
+		<operation name='obtenerDiscapacidades'>
+			<documentation>Consulta de Discapacidades</documentation>
+			<input message='tns:obtenerDiscapacidadesRequest' />
+			<output message='tns:obtenerDiscapacidadesResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDiscapacidadesBinding' type='tns:obtenerDiscapacidadesPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDiscapacidades'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDiscapacidades' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDiscapacidadesService'>
+		<port name='obtenerDiscapacidadesPort' binding='tns:obtenerDiscapacidadesBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!-- @TODO: Servicio 8 (consultar los paises) -->
+
+	<message name='obtenerPaisesRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerPaisesResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerPaisesPortType'>
+		<operation name='obtenerPaises'>
+			<documentation>Consulta de Paises</documentation>
+			<input message='tns:obtenerPaisesRequest' />
+			<output message='tns:obtenerPaisesResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerPaisesBinding' type='tns:obtenerPaisesPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerPaises'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerPaises' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerPaisesService'>
+		<port name='obtenerPaisesPort' binding='tns:obtenerPaisesBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!-- @TODO: Servicio 9 (consultar detalle del país por ID) -->
+
+	<message name='obtenerDetallePaisPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetallePaisPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetallePaisPorIdPortType'>
+		<operation name='obtenerDetallePaisPorId'>
+			<documentation>Consulta de País por ID</documentation>
+			<input message='tns:obtenerDetallePaisPorIdRequest' />
+			<output message='tns:obtenerDetallePaisPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetallePaisPorIdBinding' type='tns:obtenerDetallePaisPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetallePaisPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetallePaisPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetallePaisPorIdService'>
+		<port name='obtenerDetallePaisPorIdPort' binding='tns:obtenerDetallePaisPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 10 (consultar detalle de discapacidad por ID) -->
+	
+	<message name='obtenerDetalleDiscapacidadPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleDiscapacidadPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleDiscapacidadPorIdPortType'>
+		<operation name='obtenerDetalleDiscapacidadPorId'>
+			<documentation>Consulta de Discapacidad por ID</documentation>
+			<input message='tns:obtenerDetalleDiscapacidadPorIdRequest' />
+			<output message='tns:obtenerDetalleDiscapacidadPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleDiscapacidadPorIdBinding' type='tns:obtenerDetalleDiscapacidadPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleDiscapacidadPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetalleDiscapacidadPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleDiscapacidadPorIdService'>
+		<port name='obtenerDetalleDiscapacidadPorIdPort' binding='tns:obtenerDetalleDiscapacidadPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 11 (consultar detalle de etnia por ID) -->
+	
+	<message name='obtenerDetalleEtniaPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleEtniaPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleEtniaPorIdPortType'>
+		<operation name='obtenerDetalleEtniaPorId'>
+			<documentation>Consulta de Etnia por ID</documentation>
+			<input message='tns:obtenerDetalleEtniaPorIdRequest' />
+			<output message='tns:obtenerDetalleEtniaPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleEtniaPorIdBinding' type='tns:obtenerDetalleEtniaPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleEtniaPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetalleEtniaPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleEtniaPorIdService'>
+		<port name='obtenerDetalleEtniaPorIdPort' binding='tns:obtenerDetalleEtniaPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 12 (consultar detalle de estado por ID) -->
+	
+	<message name='obtenerDetalleEstadoPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleEstadoPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleEstadoPorIdPortType'>
+		<operation name='obtenerDetalleEstadoPorId'>
+			<documentation>Consulta de Estado por ID</documentation>
+			<input message='tns:obtenerDetalleEstadoPorIdRequest' />
+			<output message='tns:obtenerDetalleEstadoPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleEstadoPorIdBinding' type='tns:obtenerDetalleEstadoPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleEstadoPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetalleEstadoPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleEstadoPorIdService'>
+		<port name='obtenerDetalleEstadoPorIdPort' binding='tns:obtenerDetalleEstadoPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 13 (consultar detalle de municipio por ID) -->
+	
+	<message name='obtenerDetalleMunicipioPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleMunicipioPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleMunicipioPorIdPortType'>
+		<operation name='obtenerDetalleMunicipioPorId'>
+			<documentation>Consulta de Municipio por ID</documentation>
+			<input message='tns:obtenerDetalleMunicipioPorIdRequest' />
+			<output message='tns:obtenerDetalleMunicipioPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleMunicipioPorIdBinding' type='tns:obtenerDetalleMunicipioPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleMunicipioPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetalleMunicipioPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleMunicipioPorIdService'>
+		<port name='obtenerDetalleMunicipioPorIdPort' binding='tns:obtenerDetalleMunicipioPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 14 (consultar detalle de parroquia por ID) -->
+	
+	<message name='obtenerDetalleParroquiaPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleParroquiaPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleParroquiaPorIdPortType'>
+		<operation name='obtenerDetalleParroquiaPorId'>
+			<documentation>Consulta de Parroquia por ID</documentation>
+			<input message='tns:obtenerDetalleParroquiaPorIdRequest' />
+			<output message='tns:obtenerDetalleParroquiaPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleParroquiaPorIdBinding' type='tns:obtenerDetalleParroquiaPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleParroquiaPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetalleParroquiaPorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleParroquiaPorIdService'>
+		<port name='obtenerDetalleParroquiaPorIdPort' binding='tns:obtenerDetalleParroquiaPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 15 (consultar detalle de ente por ID) -->
+	
+	<message name='obtenerDetalleEntePorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleEntePorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleEntePorIdPortType'>
+		<operation name='obtenerDetalleEntePorId'>
+			<documentation>Consulta de Ente por ID</documentation>
+			<input message='tns:obtenerDetalleEntePorIdRequest' />
+			<output message='tns:obtenerDetalleEntePorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleEntePorIdBinding' type='tns:obtenerDetalleEntePorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleEntePorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDetalleEntePorId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleEntePorIdService'>
+		<port name='obtenerDetalleEntePorIdPort' binding='tns:obtenerDetalleEntePorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 16 (consultar Direcciones) -->
+	
+	<message name='obtenerDireccionesRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDireccionesResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDireccionesPortType'>
+		<operation name='obtenerDirecciones'>
+			<documentation>Consultar direcciones</documentation>
+			<input message='tns:obtenerDireccionesRequest' />
+			<output message='tns:obtenerDireccionesResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDireccionesBinding' type='tns:obtenerDireccionesPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDirecciones'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDirecciones' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDireccionesService'>
+		<port name='obtenerDireccionesPort' binding='tns:obtenerDireccionesBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 17 (consultar Direcciones de linea por Direccion) -->
+	
+	<message name='obtenerDireccionesLineaPorDireccionIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDireccionesLineaPorDireccionIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDireccionesLineaPorDireccionIdPortType'>
+		<operation name='obtenerDireccionesLineaPorDireccionId'>
+			<documentation>Consultar Dirección de Linea</documentation>
+			<input message='tns:obtenerDireccionesLineaPorDireccionIdRequest' />
+			<output message='tns:obtenerDireccionesLineaPorDireccionIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDireccionesLineaPorDireccionIdBinding' type='tns:obtenerDireccionesLineaPorDireccionIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDireccionesLineaPorDireccionId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerDireccionesLineaPorDireccionId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDireccionesLineaPorDireccionIdService'>
+		<port name='obtenerDireccionesLineaPorDireccionIdPort' binding='tns:obtenerDireccionesLineaPorDireccionIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 18 (consultar Coordinaciones Por Direccion de Linea) -->
+	
+	<message name='obtenerCoordinacionesPorDireccionLineaIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerCoordinacionesPorDireccionLineaIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerCoordinacionesPorDireccionLineaIdPortType'>
+		<operation name='obtenerCoordinacionesPorDireccionLineaId'>
+			<documentation>Consultar Dirección de Linea</documentation>
+			<input message='tns:obtenerCoordinacionesPorDireccionLineaIdRequest' />
+			<output message='tns:obtenerCoordinacionesPorDireccionLineaIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerCoordinacionesPorDireccionLineaIdBinding' type='tns:obtenerCoordinacionesPorDireccionLineaIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerCoordinacionesPorDireccionLineaId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerCoordinacionesPorDireccionLineaId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerCoordinacionesPorDireccionLineaIdService'>
+		<port name='obtenerCoordinacionesPorDireccionLineaIdPort' binding='tns:obtenerCoordinacionesPorDireccionLineaIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 19 (consultar detalle de Oficina por id) -->
+	
+	<message name='obtenerDetalleOficinaPorIdRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerDetalleOficinaPorIdResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerDetalleOficinaPorIdPortType'>
+		<operation name='obtenerDetalleOficinaPorId'>
+			<documentation>Consultar Oficina por ID</documentation>
+			<input message='tns:obtenerDetalleOficinaPorIdRequest' />
+			<output message='tns:obtenerDetalleOficinaPorIdResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerDetalleOficinaPorIdBinding' type='tns:obtenerDetalleOficinaPorIdPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerDetalleOficinaPorId'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerCoordinacionesPorDireccionLineaId' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerDetalleOficinaPorIdService'>
+		<port name='obtenerDetalleOficinaPorIdPort' binding='tns:obtenerDetalleOficinaPorIdBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	
+	<!--  @TODO: Servicio 20 (obtener esttructura por nivel) -->
+	
+	<message name='obtenerEstructuraPorNivelRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerEstructuraPorNivelResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerEstructuraPorNivelPortType'>
+		<operation name='obtenerEstructuraPorNivel'>
+			<documentation>obtenerEstructuraPorNivel</documentation>
+			<input message='tns:obtenerEstructuraPorNivelRequest' />
+			<output message='tns:obtenerEstructuraPorNivelResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerEstructuraPorNivelBinding' type='tns:obtenerEstructuraPorNivelPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerEstructuraPorNivel'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEstructuraPorNivel' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerEstructuraPorNivelService'>
+		<port name='obtenerEstructuraPorNivelPort' binding='tns:obtenerEstructuraPorNivelBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 21 (obtener esttructura por nivel) -->
+	
+	<message name='obtenerEstructuraPorNivelCompletoRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerEstructuraPorNivelCompletoResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerEstructuraPorNivelCompletoPortType'>
+		<operation name='obtenerEstructuraPorNivelCompleto'>
+			<documentation>obtenerEstructuraPorNivelCompleto</documentation>
+			<input message='tns:obtenerEstructuraPorNivelCompletoRequest' />
+			<output message='tns:obtenerEstructuraPorNivelCompletoResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerEstructuraPorNivelCompletoBinding' type='tns:obtenerEstructuraPorNivelCompletoPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerEstructuraPorNivelCompleto'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEstructuraPorNivelCompleto' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerEstructuraPorNivelCompletoService'>
+		<port name='obtenerEstructuraPorNivelCompletoPort' binding='tns:obtenerEstructuraPorNivelCompletoBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 22 (obtener esttructura por tipo) -->
+	
+	<message name='obtenerEstructuraPorTipoRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='obtenerEstructuraPorTipoResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='obtenerEstructuraPorTipoPortType'>
+		<operation name='obtenerEstructuraPorTipo'>
+			<documentation>obtenerEstructuraPorTipo</documentation>
+			<input message='tns:obtenerEstructuraPorTipoRequest' />
+			<output message='tns:obtenerEstructuraPorTipoResponse' />
+		</operation>
+	</portType>
+	<binding name='obtenerEstructuraPorTipoBinding' type='tns:obtenerEstructuraPorTipoPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='obtenerEstructuraPorTipo'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#obtenerEstructuraPorTipo' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='obtenerEstructuraPorTipoService'>
+		<port name='obtenerEstructuraPorTipoPort' binding='tns:obtenerEstructuraPorTipoBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	<!--  @TODO: Servicio 23 (web service envio de notificaciones) -->
+	
+	<message name='notificarGTURequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='notificarGTUResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='notificarGTUPortType'>
+		<operation name='notificarGTU'>
+			<documentation>notificarGTU</documentation>
+			<input message='tns:notificarGTURequest' />
+			<output message='tns:notificarGTUResponse' />
+		</operation>
+	</portType>
+	<binding name='notificarGTUBinding' type='tns:notificarGTUPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='notificarGTU'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#notificarGTU' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='notificarGTUService'>
+		<port name='notificarGTUPort' binding='tns:notificarGTUBinding'>
+			<soap:address
+				location='http://webservices.mppeuct.gob.ve/global/servicios.php' />
+		</port>
+	</service>
+	
+	
+	
+</definitions>

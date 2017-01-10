@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name='consultar'
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://172.17.90.49/webservices/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://172.17.90.49/webservices/">
+
+	<!-- acá solo se define el tipo arreglo de estructuras -->
+	<types>
+		<xsd:schema targetNamespace="http://172.17.90.49/webservices/mensajes_masivos">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="Estructura">
+				<xsd:all>
+					<xsd:element name="error" type="xsd:int" />
+					<xsd:element name="respuesta" type="xsd:Estructura[]" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="ArregloDeEstructuras">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:Estructura[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<!-- fin de la definiciond e tipos -->
+
+        <!--  @TODO: Servicio 25 (web service envio de notificaciones correos) -->
+	
+	<message name='mensajesMasivosCorreoRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='mensajesMasivosCorreoResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='mensajesMasivosCorreoPortType'>
+		<operation name='mensajesMasivosCorreo'>
+			<documentation>mensajesMasivosCorreo</documentation>
+			<input message='tns:mensajesMasivosCorreoRequest' />
+			<output message='tns:mensajesMasivosCorreoResponse' />
+		</operation>
+	</portType>
+	<binding name='mensajesMasivosCorreoBinding' type='tns:mensajesMasivosCorreoPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='mensajesMasivosCorreo'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#mensajesMasivosCorreo' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='mensajesMasivosCorreoService'>
+		<port name='mensajesMasivosCorreoPort' binding='tns:mensajesMasivosCorreoBinding'>
+			<soap:address
+				location='http://172.17.90.49/webservices/mensajes_masivos/servicios.php' />
+		</port>
+	</service>
+	
+	  
+	
+        <!--  @TODO: Servicio 26 (web service envio de notificaciones sms) -->
+	
+	<message name='mensajesMasivosSmsRequest'>
+		<part name='numero' type='tns:ArregloDeEstructuras' />
+	</message>
+	<message name='mensajesMasivosSmsResponse'>
+		<part name="return" type="tns:ArregloDeEstructuras" />
+	</message>
+	<portType name='mensajesMasivosSmsPortType'>
+		<operation name='mensajesMasivosSms'>
+			<documentation>mensajesMasivosSms</documentation>
+			<input message='tns:mensajesMasivosSmsRequest' />
+			<output message='tns:mensajesMasivosSmsResponse' />
+		</operation>
+	</portType>
+	<binding name='mensajesMasivosSmsBinding' type='tns:mensajesMasivosSmsPortType'>
+		<soap:binding style='rpc'
+			transport='http://schemas.xmlsoap.org/soap/http' />
+		<operation name='mensajesMasivosSms'>
+			<soap:operation soapAction='urn:xmethods-delayed-quotes#mensajesMasivosSms' />
+			<input>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</input>
+			<output>
+				<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+					encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+			</output>
+		</operation>
+	</binding>
+
+	<service name='mensajesMasivosSmsService'>
+		<port name='mensajesMasivosSmsPort' binding='tns:mensajesMasivosSmsBinding'>
+			<soap:address
+				location='http://172.17.90.49/webservices/mensajes_masivos/servicios.php' />
+		</port>
+	</service>
+	
+	
+	
+	
+</definitions>

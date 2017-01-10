@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+    name='consultarProveedor'
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:tns="http://webservices.mppeuct.gob.ve/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns="http://schemas.xmlsoap.org/wsdl/" 
+    targetNamespace="http://webservices.mppeuct.gob.ve/">
+
+    <types>
+        <xsd:schema targetNamespace="http://webservices.mppeuct.gob.ve/ldap">
+            <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+            <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+            <xsd:complexType name="Estructura">
+                <xsd:all>
+                    <xsd:element name="error" type="xsd:int" />
+                     <xsd:element name="respuesta" type="xsd:Estructura[]" />
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="ArregloDeEstructuras">
+                <xsd:complexContent>
+                    <xsd:restriction base="SOAP-ENC:Array">
+                        <xsd:attribute ref="SOAP-ENC:arrayType"  wsdl:arrayType="tns:Estructura[]"/>
+                    </xsd:restriction>
+                </xsd:complexContent>
+            </xsd:complexType>
+        </xsd:schema>
+        
+    </types>
+	
+        
+    <!-- Servicio 1 -->
+    <!--  @TODO: Servicio 21 (obtener esttructura por nivel) -->
+	
+    <message name='consultarProveedorRequest'>
+        <part name='numero' type='tns:ArregloDeEstructuras' />
+    </message>
+    <message name='consultarProveedorResponse'>
+        <part name="return" type="tns:ArregloDeEstructuras" />
+    </message>
+    <portType name='consultarProveedorPortType'>
+        <operation name='consultarProveedor'>
+            <documentation>consultarProveedor</documentation>
+            <input message='tns:consultarProveedorRequest' />
+            <output message='tns:consultarProveedorResponse' />
+        </operation>
+    </portType>
+    <binding name='consultarProveedorBinding' type='tns:consultarProveedorPortType'>
+        <soap:binding style='rpc'
+                              transport='http://schemas.xmlsoap.org/soap/http' />
+        <operation name='consultarProveedor'>
+            <soap:operation soapAction='urn:xmethods-delayed-quotes#consultarProveedor' />
+            <input>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+                                           encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+            </input>
+            <output>
+                <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes'
+                                           encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+            </output>
+        </operation>
+    </binding>
+
+    <service name='consultarProveedorService'>
+        <port name='consultarProveedorPort' binding='consultarProveedorBinding'>
+            <soap:address location='http://webservices.mppeuct.gob.ve/proveedor/servicio.php'/>
+        </port>
+    </service>
+
+</definitions>
